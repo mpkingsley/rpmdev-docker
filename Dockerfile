@@ -3,8 +3,9 @@ FROM fedora:latest
 ENV CFLAGS "" CXXFLAGS "" LDFLAGS ""
 
 RUN dnf update -y \
-&& dnf groupinstall "Development Tools" "RPM Development Tools" \
-&& useradd -m /home/rpmbuild rpmbuild
+&& dnf groupinstall -y "Development Tools" "RPM Development Tools" \
+&& dnf install sudo \
+&& useradd -m -aG wheel -d /home/rpmbuild rpmbuild
 
 USER rpmbuild
 
